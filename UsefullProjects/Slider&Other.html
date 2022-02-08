@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+
+<!-- <style media="screen">
+    .slider{
+      width:300px;
+      height:15px;
+      background:lightgray;
+      border-radius: 10px;
+
+
+    }
+    .thumb{
+      width:30px;
+      height:25px;
+      background:blue;
+      border-radius: 10px;
+      position: relative;
+      top: -5px;
+      left: 20px;
+      cursor: pointer;
+
+    }
+
+</style>
+<div class="slider">
+  <div class="thumb">
+
+  </div>
+</div>
+
+<script>
+let slider = document.querySelector(".slider");
+let thumb = document.querySelector(".thumb");
+let shiftX;
+
+thumb.onpointerdown = function(event) {
+  event.preventDefault(); // prevent selection start (browser action)
+
+  shiftX = event.clientX - thumb.getBoundingClientRect().left;
+
+  thumb.setPointerCapture(event.pointerId);
+};
+
+thumb.onpointermove = function(event) {
+  let newLeft = event.clientX - shiftX - slider.getBoundingClientRect().left;
+
+  // если указатель находится за пределами слайдера => отрегулировать "left", чтобы оставаться в пределах границ
+  if (newLeft < 0) {
+    newLeft = 0;
+  }
+  let rightEdge = slider.offsetWidth - thumb.offsetWidth;
+  if (newLeft > rightEdge) {
+    newLeft = rightEdge;
+  }
+
+  thumb.style.left = newLeft + 'px';
+};
+
+thumb.ondragstart = () => false;
+
+
+</script>
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+ -->
+
+
+
+<style media="screen">
+.slider{
+  max-width: 90%;
+  position: relative;
+  margin: auto;
+  height: 300px;
+  margin-bottom: 15px;
+}
+.slider .item img {
+  object-fit: cover;
+  width: 100%;
+  height: 300px;
+
+}
+.slider .prev, .slider .next {
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  top: 50%;
+  width: auto;
+  margin-top: -22px;
+  padding: 16px;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  transition: all  0.3s ease-out;
+}
+.slider .next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+.slider .prev:hover,
+.slider .next:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+.slideText {
+  position: absolute;
+  color: #fff;
+  font-size: 35px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+
+</style>
+
+
+
+
+<div class="slider">
+    <div class="item">
+        <img src="https://funart.pro/uploads/posts/2021-03/1617048969_52-p-oboi-krasivie-peizazhi-prirodi-56.jpg" alt="Первый слайд">
+        <div class="slideText">Заголовок слайда 1</div>
+    </div>
+
+    <div class="item">
+        <img src="https://klike.net/uploads/posts/2019-01/1547365376_1.jpg" alt="Второй слайд">
+        <div class="slideText">Заголовок слайда 2</div>
+    </div>
+
+    <div class="item">
+        <img src="https://funart.pro/uploads/posts/2021-03/1617048969_52-p-oboi-krasivie-peizazhi-prirodi-56.jpg" alt="Третий слайд">
+        <div class="slideText">Заголовок слайда 3</div>
+    </div>
+
+    <a class="prev" onclick="minusSlide()">&#10094;</a>
+    <a class="next" onclick="plusSlide()">&#10095;</a>
+</div>
+
+
+
+<script>
+var slideIndex = 1;
+showSlides(slideIndex);
+
+function plusSlide() {
+    showSlides(slideIndex += 1);
+}
+
+function minusSlide() {
+    showSlides(slideIndex -= 1);
+}
+
+function currentSlide(n) {
+    showSlides(slideIndex = n);
+}
+
+function showSlides(n) {
+    var i;
+    var slides = document.getElementsByClassName("item");
+    if (n > slides.length) {
+      slideIndex = 1
+    }
+    if (n < 1) {
+        slideIndex = slides.length
+    }
+    for (i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+    }
+    slides[slideIndex - 1].style.display = "block";
+}
+
+
+</script>
+
+
+<!-- <style media="screen">
+  .container{
+    display: flex;
+  flex-direction: column;
+  width: 500px;
+  height: 100%;
+  }
+  .item{
+    width: 100%;
+    height: 20px;
+    border: 2px solid black;
+    cursor: pointer;
+
+  }
+  .vl+div{
+    display: block;
+    width: 100%;
+    height: auto;
+    font-size: 80%;
+    border: 2px solid black;
+    position: relative;
+    bottom: 1px;
+    transition: all 0.01s ease-out;
+  }
+.value{
+display: none;
+}
+
+
+</style>
+
+
+<div class="container">
+  <div class="item"  data-toggle-id="value" >
+    lorem
+
+  </div>
+  <div class="vl value" id="value">
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+  </div>
+
+
+  <div class="item"  data-toggle-id="value">
+    lorem
+  </div>
+  <div class=" vl value " id="value">
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+  </div>
+
+
+  <div class="item"  data-toggle-id="value">
+    lorem
+
+
+  </div>
+  <div class=" vl value " id="value">
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+  </div>
+
+</div>
+
+<script>
+let container = document.querySelector(".container");
+let value = document.querySelector(".vl");
+
+    let selectedTd;
+
+    container.onclick = function(event) {
+      let target = event.target;
+
+      while (target != this) {
+          highlight(target);
+          return;
+      }
+    }
+
+    function highlight(node) {
+      if (selectedTd) {
+        selectedTd.classList.remove('vl');
+      }
+      selectedTd = node;
+      node.classList.add('vl');
+
+
+    }
+
+</script>
+
+
+ -->
+<!-- <style media="screen">
+
+    .temp{
+      width: 70%;
+    }
+
+</style>
+ <h1>lorem</h1>
+ <div class="temp">
+   Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+   Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+ </div>
+ <script>
+
+
+
+ let x = ['   Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.']
+   function populate() {
+     while(true) {
+       let windowRelativeBottom = document.documentElement.getBoundingClientRect().bottom;
+       if (windowRelativeBottom > document.documentElement.clientHeight + 100) break;
+       document.body.insertAdjacentHTML("beforeend", `<p> ${x}</p> `)
+     }
+   }
+
+   window.addEventListener('scroll', populate);
+
+   populate();
+ </script> -->
+
+<!--
+<style media="screen">
+
+  .container{
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+
+  }
+  .item{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .pol{
+    height: 20px;
+  }
+  td{
+    width: 40px;
+    height: 20px;
+    border: 1px solid black;
+  }
+  table{
+    border-spacing: inherit;
+  }
+  thead td{
+    border: 2px solid black;
+
+  }
+</style>
+
+<div class="container">
+
+  <div class="item">
+    <p>Month</p>
+    <input type="text" class="pol" name="" id="input1" value="">
+    <p>Year</p>
+    <input type="text" class="pol" name="" id="input2" value="">
+  </div>
+
+  <input type="button" name="" onclick="gener" value="Generate">
+
+</div>
+
+<div id="calendar"></div>
+
+
+<script>
+   function createCalendar(elem, year, month) {
+
+     let mon = month - 1;
+     let d = new Date(year, mon);
+
+     let table = '<table><tr><th>пн</th><th>вт</th><th>ср</th><th>чт</th><th>пт</th><th>сб</th><th>вс</th></tr><tr>';
+
+     for (let i = 0; i < getDay(d); i++) {
+       table += '<td></td>';
+     }
+
+     while (d.getMonth() == mon) {
+       table += '<td>' + d.getDate() + '</td>';
+
+       if (getDay(d) % 7 == 6) {
+         table += '</tr><tr>';
+       }
+
+       d.setDate(d.getDate() + 1);
+     }
+
+     if (getDay(d) != 0) {
+       for (let i = getDay(d); i < 7; i++) {
+         table += '<td></td>';
+       }
+     }
+
+     table += '</tr></table>';
+
+     elem.innerHTML = table;
+   }
+
+   function getDay(date) {
+     let day = date.getDay();
+     if (day == 0) day = 7;
+     return day - 1;
+   }
+
+function gener(){
+
+  createCalendar(calendar, input1.value, input2.value);
+
+}
+
+document.addEventListener('click', gener);
+
+ </script> -->
+
+ <!-- <style>
+      .a {
+          color: blue;
+          text-decoration: none;
+      }
+
+      .a:hover {
+          border-bottom: 1px dashed blue;
+      }
+  </style>
+</head>
+<body>
+  <ul>
+      <li><a href="https://google.com"> https://google.com</a></li>
+      <li><a href="https://itstep.org"> https://itstep.org</a></li>
+      <li><a href="https://mystat.itstep.org"> https://mystat.itstep.org</a></li>
+      <li><a href="https://bigpicture.ru/?p=527019"> https://bigpicture.ru/?p=527019</a></li>
+      <li><a href=""> Собака</a></li>
+      <li><a href=""> Playboy</a></li>
+  </ul>
+  <script>
+
+
+      for (let e of Array.from(document.links)) {
+          if (e.href.match(/^https?:/i))
+              e.classList.add("a")
+      }
+  </script>
+
+
+
+
+
+
+
+ -->
+
+
+
+
+
+<!--
+
+  <style media="screen">
+ #main{
+   background: grey;
+ }
+ *{
+   margin: 0px;
+ }
+
+ #main .selected {
+   background: red;
+ }
+
+ </style>
+
+
+ <div id="main" >
+   <p class="text">1.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+   <p class="text">2.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+   <p class="text">3.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+   <p class="text">4.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+   <p class="text">5.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+   <p class="text">6.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+   <p class="text">7.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+ </div>
+ <script>
+ let rows = document.querySelectorAll('p');
+ rows.forEach((element) => {
+   element.onclick = paint;
+ });
+
+ let lastRow;
+
+ function paint(event) {
+let target = event.target;
+
+   if (event.shiftKey) {
+     if (target < this.target) {
+       for (let i = target; i <= this.target; i++) {
+         rows[i].classList.add('selected');
+       }
+     } else {
+       for (let i = target; i >= this.targen; i--) {
+         rows[i].classList.add('selected');
+       }
+     }
+     return;
+   }
+   if (event.ctrlKey) {
+     if (this.classList.contains('selected')) {
+       this.classList.remove('selected');
+       return;
+     } else {
+       this.classList.add('selected');
+       return;
+     }
+   }
+
+   document.querySelectorAll('.selected').forEach((elem) => {
+     elem.classList.remove('selected');
+   });
+   if (!this.classList.contains('selected')) {
+     this.classList.add('selected');
+
+   }
+   if (this.classList.contains('selected')) {
+     lastRow = this;
+     return;
+   }
+ }
+
+
+
+ </script>
+ -->
+
+
+<!-- <style media="screen">
+
+
+td{
+  width: 40px;
+  height: 20px;
+  border: 0.5px solid black;
+
+}
+
+table{
+  width: 100%;
+  border-spacing: inherit;
+}
+thead td{
+  cursor: pointer;
+  width: 20px;
+  border: 0.5px solid black;
+
+}
+.container{
+  background: lightgray;
+  width: 300px;
+  padding: 20px;
+}
+</style>
+
+
+<div class="container" id="temp">
+
+   <table>
+    <thead>
+      <tr>
+        <td  onclick="func()">Firstname</td>
+        <td  onclick="func1()">Lastname</td>
+        <td   onclick="func2()">Age</td>
+        <td  onclick="func3()">Company</td>
+
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="temp1">Mark</td>
+        <td class="temp2">Page</td>
+        <td class="temp3">34</td>
+        <td class="temp4">Facebook</td>
+
+      </tr>
+      <tr>
+        <td class="temp1">Timothy</td>
+        <td class="temp2">Cook</td>
+        <td class="temp3">45</td>
+        <td class="temp4">Google</td>
+
+      </tr>
+      <tr>
+        <td class="temp1">Larry</td>
+        <td class="temp2">Gates</td>
+        <td class="temp3">20</td>
+        <td class="temp4">Apple</td>
+
+      </tr>
+
+    </tbody>
+  </table>
+
+
+</div>
+
+
+  <script>
+
+// let elem = document.querySelector('#temp');
+//
+//     let table = '<table> <thead> <tr><th onclick ="func()" id ="d1">Firstname</th><th id ="d2" >LastNmae</th><th id ="d3" >Age</th><th id ="d4" >Company</th></tr></thead> <tbody> <tr>';
+//
+//     let tr1= ['Mark','Aarry','Bill'];
+//     let tr2= ['Pages','Cook','Gates'];
+//     let tr3= ['45','24','23'];
+//     let tr4= ['Facebook','Apple','Google'];
+//
+//     let d1 = document.getElementById('d1');
+//     let d2 = document.getElementById('d2');
+//     let d3 = document.getElementById('d3');
+//     let d4 = document.getElementById('d4');
+//
+//
+//
+//
+//     for (var i = 0; i < tr1.length; i++) {
+//
+//        table+=`<tr><td>${tr1[i]}</td><td>${tr2[i]}</td><td>${tr3[i]}</td><td>${tr4[i]}</td> </tr>`;
+//     }
+//
+//     table += '</tr></tbody></table>';
+//
+//     elem.innerHTML = table;
+//
+//
+//     let func = function(){
+//       tr1.sort();
+//       console.log(1  );
+//     }
+//
+//
+//
+//
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  let temp = document.getElementsByClassName('temp1')
+ let tr1 = new Array(temp.length);
+ let temp1 = document.getElementsByClassName('temp2')
+let tr2 = new Array(temp1.length);
+let temp2 = document.getElementsByClassName('temp3')
+let tr3 = new Array(temp2.length);
+let temp3 = document.getElementsByClassName('temp4')
+let tr4 = new Array(temp3.length);
+
+
+ let func = function(event){
+
+       for(var i = temp.length; i--;) {
+         tr1[i] = temp[i].textContent;
+       }
+      tr1.sort();
+
+      for (var i = 0; i < temp.length; i++) {
+
+        temp[i].textContent = tr1[i];
+      }
+
+}
+
+let func1 = function(event){
+
+        for(var i = temp1.length; i--;) {
+          tr2[i] = temp1[i].textContent;
+        }
+       tr2.sort();
+
+       for (var i = 0; i < temp1.length; i++) {
+
+         temp1[i].textContent = tr2[i];
+       }
+
+}
+let func2 = function(event){
+
+      for(var i = temp2.length; i--;) {
+        tr3[i] = temp2[i].textContent;
+      }
+     tr3.sort();
+
+     for (var i = 0; i < temp2.length; i++) {
+
+       temp2[i].textContent = tr3[i];
+     }
+
+}
+
+let func3 = function(event){
+
+    for(var i = temp3.length; i--;) {
+      tr4[i] = temp3[i].textContent;
+    }
+   tr4.sort();
+
+   for (var i = 0; i < temp3.length; i++) {
+
+     temp3[i].textContent = tr4[i];
+   }
+
+}
+
+
+
+  </script>
+ -->
+
+
+<!-- <style media="screen">
+
+  .container{
+    border-top: 3px solid black;
+    width: 70%;
+    height: auto;
+    background: lightgray;
+    padding: 30px;
+
+  }
+  .temp{
+    width: 100%;
+    cursor: pointer;
+    display: block;
+    background: lightgrey;
+    text-decoration: none;
+  }
+  .temp1{
+    display: none;
+    width: 100px;
+    background: red;
+  }
+</style>
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+<div class="container">
+      <div class="temp" >
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+      </div>
+      <textarea  class="temp1" name="name" rows="8" cols="80"></textarea>
+</div>
+
+<script>
+
+let temp = document.querySelector('.temp1')
+let div = document.querySelector('.temp')
+
+
+
+
+
+document.addEventListener('keydown', function(event){
+    if (event.shiftKey && ['e','E'].includes(event.key) ) {
+      div.style = 'display:none;';
+      temp.classList.remove('temp1');
+      temp.classList.add('temp');
+      temp.innerText = div.innerText;
+      console.log(1);
+
+    }
+});
+
+document.addEventListener('keydown', function(event){
+    if (event.shiftKey && ['S','s'].includes(event.key) ) {
+      div.innerText = temp.value;
+      div.style = 'display:block;';
+      temp.classList.remove('temp');
+      temp.classList.add('temp1');
+
+      console.log(1);
+
+    }
+});
+
+
+
+
+</script>
+ -->
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </body>
+</html>

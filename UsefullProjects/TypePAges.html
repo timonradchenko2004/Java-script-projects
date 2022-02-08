@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+
+
+<style media="screen">
+
+  .container{
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+  }
+  .n-block{
+    display: flex;
+    flex-direction: row;
+    margin: 0 auto;
+    cursor: pointer;
+
+  }
+  .block{
+    width: 100px;
+    height: 40px;
+    border-bottom: 2px solid black;
+    text-align: center;
+    margin: 0 10px;
+  }
+  .block:hover{
+    border: 1px solid lightgray;
+  }
+  .page{
+    width: 80%;
+    height: 700px;
+    border: 3px dotted gray;
+    background: lightgray;
+    margin:0 auto;
+  }
+  .open{
+    width: 100px;
+    height: 40px;
+    border: 2px solid black;
+    border-bottom: none;
+    margin-bottom: 0px;
+    text-align: center;
+  }
+</style>
+
+
+<div class="container">
+       <div class="n-block">
+        <div class="block bl1" onclick="func()">1</div>
+        <div class="block bl2" onclick="func2()">2</div>
+        <div class="block bl3" onclick="func3()">3</div>
+      </div> 
+</div>
+
+
+<script>
+
+let temp = document.querySelector(".block");
+let elem = document.querySelector(".container");
+
+ 
+ let main = document.querySelector('.n-block');
+
+ let dv1 = document.createElement('div');
+
+ let dv2 = document.createElement('div');
+ dv2.style = 'background:red;'
+
+ let dv3 = document.createElement('div');
+ dv3.style = 'background:green;'
+
+
+ 
+ let selectedTd;
+
+main.onclick = function(event) {
+  let target = event.target;
+
+  while (target != this) {
+    
+    if (selectedTd) {
+    selectedTd.classList.remove('open');
+  }
+  selectedTd = target;
+  selectedTd.classList.add('open');
+
+    target = target.parentNode;
+  }
+}
+
+
+    let func = function(event){
+    dv1.classList.add('page');
+    dv2.classList.remove('page');
+    dv3.classList.remove('page');
+    elem.append(dv1);
+  }
+  let func2 = function(){
+    dv2.classList.add('page');
+    elem.append(dv2);
+    dv1.classList.remove('page');
+    dv3.classList.remove('page');
+
+  }
+  let func3 = function(){
+    dv3.classList.add('page');    
+    elem.append(dv3);
+    dv2.classList.remove('page');
+    dv1.classList.remove('page');
+
+  } 
+
+
+
+
+
+</script>
+
+  </body>
+</html>

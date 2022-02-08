@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body{
+        background-color: blueviolet;
+        filter: blur(1%);
+
+    }
+    .temp{
+        width: 5px;
+        height: 5px;
+        border-radius: 100%;
+        position: absolute;
+        background-color: rgba(201, 48, 48, 0.671);
+        animation: block 10s infinite;
+
+        transition: all ease ;
+        animation-timing-function: linear;
+        box-shadow: 0 0 0 0.5em rgba(226, 100, 100, 0.267);
+    }
+    @keyframes block{
+        0%{
+        transform: translateY(-1px);
+
+        }
+
+        100%{
+            transform: translateY(1100px);
+
+        }
+    }
+</style>
+<body>
+    
+<div class="block">
+
+</div>
+
+<script>
+
+let temp1 = 0;
+  let current1 = 0;
+  let timerId = setInterval(function() {
+    temp1 = current1;
+    current1++;
+    return temp1;
+  }, 1000);
+
+console.log(temp1);
+
+
+let main = document.querySelector('.block');
+
+setInterval(function() {
+    for (let index = 0; index < 5; index++) {
+    let temp = document.createElement('div');
+    temp.classList.add('temp');
+    wid =Math.round(Math.random()*10);
+    temp.style = `left:${Math.round(Math.random()*1000)}px;top:-${Math.round(Math.random()*100)}px;width:${wid}px;height:${wid}px;`;
+    main.append(temp);
+    }
+
+  }, 1000);
+
+
+
+
+</script>
+
+</body>
+</html>

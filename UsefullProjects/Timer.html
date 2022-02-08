@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width= initial-scale=1.0">
+
+    <title>Document</title>
+</head>
+<body>
+    
+
+<!-- <div class="container"> 
+    <h2>Список Дел</h2>
+    <ul class="list">
+
+    </ul>
+</div>
+
+<input type="text" id="text">
+<input type="button" onclick="func()">
+
+<script>
+
+let text = document.querySelector('#text');
+let list = document.querySelector('.list');
+
+let func = function(){
+
+let temp = document.createElement('LI');
+temp.textContent = text.value;
+list.append(temp);
+text.value = '';
+
+}
+</script> -->
+
+<!-- <div class="container">
+
+    <h2>Редактор</h2>
+    <p>Введите что-нибудь</p>
+    <textarea name="" id="text" cols="30" rows="10" oninput="func()">Hello**World </textarea>
+
+    <h2>Вывод</h2>
+    <p id="temp">Hello**World </p>
+
+</div>
+
+<script>
+
+let temp = document.querySelector('#temp');
+let text = document.querySelector('#text');
+
+let func = function(){
+
+    temp.textContent = text.value;
+
+}
+
+</script> -->
+
+<div style="display: flex; flex-direction: row; align-items: center; ">
+Секунды:<p id="temp"> </p>
+</div>
+
+
+<script>
+
+let temp = document.querySelector('#temp');
+
+function printNumbers() {
+  let current1 = 0;
+  let timerId = setInterval(function() {
+    temp.textContent= current1;
+    current1++;
+  }, 1000);
+}
+
+
+ printNumbers();
+
+</script>
+
+
+</body>
+</html>
